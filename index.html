@@ -66,9 +66,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 .reveal.on { opacity:1; transform:translateY(0); }
 .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
 
-@keyframes fadeUp    { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-@keyframes fadeInOnly{ from{opacity:0} to{opacity:1} }
-@keyframes sparkle-float { 0%,100%{transform:translateY(0)rotate(0deg)} 50%{transform:translateY(-16px)rotate(12deg)} }
 @keyframes pulse-scroll { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.4;transform:scaleY(.55)} }
 @keyframes wave-a { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(.35)} }
 
@@ -89,7 +86,9 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   border-radius:50px; padding:.5rem 1.1rem .5rem .55rem;
   display:flex; align-items:center; gap:.7rem;
   backdrop-filter:blur(12px); box-shadow:0 2px 20px rgba(216,143,168,.2);
+  opacity:0; pointer-events:none; transition:opacity .5s ease;
 }
+#music-bar.visible { opacity:1; pointer-events:auto; }
 #music-btn {
   width:32px; height:32px; border-radius:50%;
   background:var(--rose); border:none; cursor:pointer;
@@ -130,74 +129,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 #hero-image {
   position:absolute; inset:0; z-index:0; pointer-events:none;
   background:url('hero.jpeg') center/cover no-repeat;
-}
-#hero-overlay {
-  position:absolute; inset:0; z-index:1; pointer-events:none;
-  background: linear-gradient(160deg,rgba(58,31,44,.55) 0%,rgba(47,22,34,.45) 60%,rgba(22,10,16,.65) 100%);
-}
-
-.sparkle-float {
-  position:absolute; z-index:2;
-  font-size:1.3rem; opacity:.35; color:var(--gold-light);
-  animation:sparkle-float 9s ease-in-out infinite; pointer-events:none;
-}
-
-.hero-pre {
-  font-size:.6rem; letter-spacing:.5em; text-transform:uppercase;
-  color:var(--gold-light);
-  animation: fadeUp .9s ease both;
-  margin-bottom:1.25rem; position:relative; z-index:2;
-}
-
-.hero-names {
-  font-family: var(--script);
-  font-size: clamp(5.5rem, 17vw, 11rem);
-  font-weight: 400;
-  line-height: 1.05;
-  color: #fff;
-  text-shadow: 0 2px 30px rgba(0,0,0,.4);
-  animation: fadeUp .9s .18s ease both;
-  position: relative; z-index:2;
-}
-.hero-sub-line {
-  display:block;
-  font-family: var(--serif);
-  font-size: clamp(1.3rem, 4vw, 2rem);
-  font-style: italic;
-  color: var(--rose-light);
-  line-height: 1;
-  margin: .3em 0 0;
-  animation: fadeUp .9s .28s ease both;
-  position: relative; z-index:2;
-}
-
-.hero-date {
-  font-family:var(--serif);
-  font-size:clamp(.95rem,2.5vw,1.4rem);
-  font-weight:300; letter-spacing:.22em;
-  color:rgba(255,255,255,.78);
-  animation: fadeUp .9s .38s ease both;
-  margin-top:1.25rem; position:relative; z-index:2;
-}
-.hero-quote {
-  font-family:var(--serif);
-  font-size:clamp(.95rem,2.2vw,1.2rem);
-  font-style:italic; color:var(--gold-light);
-  max-width:420px; line-height:1.85;
-  animation: fadeUp .9s .5s ease both;
-  margin-top:1.25rem; position:relative; z-index:2;
-}
-.hero-scroll {
-  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:.4rem;
-  font-size:.56rem; letter-spacing:.4em; text-transform:uppercase;
-  color:var(--rose-light); z-index:2;
-  animation: fadeInOnly .9s .8s ease both;
-}
-.scroll-line {
-  width:1px; height:45px;
-  background:linear-gradient(180deg,var(--gold),transparent);
-  animation: pulse-scroll 2s ease-in-out infinite;
 }
 
 /* ==============================
@@ -796,35 +727,6 @@ body.env-open { overflow:hidden; }
 <!-- ======================== HERO ======================== -->
 <section id="hero">
   <div id="hero-image"></div>
-  <div id="hero-overlay"></div>
-  <div class="sparkle-float" style="top:12%;left:7%;animation-delay:0s">✦</div>
-  <div class="sparkle-float" style="top:20%;right:9%;animation-delay:1.6s">✧</div>
-  <div class="sparkle-float" style="bottom:24%;left:10%;animation-delay:3s">✦</div>
-  <div class="sparkle-float" style="bottom:16%;right:7%;animation-delay:.7s">✧</div>
-  <div class="sparkle-float" style="top:42%;left:4%;animation-delay:2.1s">✦</div>
-
-  <p class="hero-pre">Con todo mi cariño te invito</p>
-
-  <div class="divider-orn">✦</div>
-
-  <h1 class="hero-names">
-    Jhobana Deneheiry
-    <span class="hero-sub-line">Mis quince años</span>
-  </h1>
-
-  <div class="divider-orn">✦</div>
-
-  <p class="hero-date">Sábado · 12 de Septiembre de 2026</p>
-
-  <p class="hero-quote">
-    Hoy inicio un nuevo capítulo,<br>
-    gracias por ser parte de mi historia.
-  </p>
-
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span>Desplázate</span>
-  </div>
 </section>
 
 
@@ -1326,6 +1228,15 @@ function toggleMusic(){
   musicBtn.textContent = playing ? '⏸' : '♪';
   wavesEl.classList.toggle('paused', !playing);
   playing ? audio.play().catch(()=>{}) : audio.pause();
+}
+
+const musicBar = document.getElementById('music-bar');
+const heroEl = document.getElementById('hero');
+if(musicBar && heroEl){
+  const heroObs = new IntersectionObserver(entries => {
+    entries.forEach(e => musicBar.classList.toggle('visible', !e.isIntersecting));
+  }, { threshold: 0 });
+  heroObs.observe(heroEl);
 }
 
 /* ---- GALLERY CAROUSEL ---- */
