@@ -377,7 +377,9 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   aspect-ratio:4/5; margin:2.75rem auto 0;
   border-radius:10px; overflow:hidden;
   box-shadow:0 25px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06);
+  cursor:grab; touch-action:pan-y; user-select:none;
 }
+.carousel:active { cursor:grabbing; }
 .carousel-slide {
   position:absolute; inset:0;
   background-size:cover; background-position:center;
@@ -913,7 +915,7 @@ body.env-open { overflow:hidden; }
       </div>
       <div class="familia-card reveal">
         <div class="familia-icon">✦</div>
-        <p class="familia-lbl">Padrinos de Libro y Rosario</p>
+        <p class="familia-lbl">Madrina de Libro y Rosario</p>
         <p class="familia-name">Claudia Irene Ruiz García</p>
       </div>
       <div class="familia-card reveal d1">
@@ -1354,11 +1356,23 @@ function toggleMusic(){
   }
 
   function next(){ goToSlide((current + 1) % slides.length); }
+  function prev(){ goToSlide((current - 1 + slides.length) % slides.length); }
 
   function resetTimer(){
     if(timer) clearInterval(timer);
     timer = setInterval(next, 4500);
   }
+
+  const carouselEl = document.getElementById('carousel');
+  let dragStartX = null;
+  carouselEl.addEventListener('pointerdown', e => { dragStartX = e.clientX; });
+  carouselEl.addEventListener('pointerup', e => {
+    if(dragStartX === null) return;
+    const delta = e.clientX - dragStartX;
+    dragStartX = null;
+    if(Math.abs(delta) > 40){ delta < 0 ? next() : prev(); }
+  });
+  carouselEl.addEventListener('pointercancel', () => { dragStartX = null; });
 
   resetTimer();
 })();
