@@ -32,7 +32,11 @@
 }
 
 html { scroll-behavior: smooth; }
-body { font-family: var(--sans); background: var(--cream); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+body { font-family: var(--sans); background: transparent; color: var(--text); overflow-x: hidden; line-height: 1.6; }
+body::before {
+  content:''; position:fixed; inset:0; z-index:-1;
+  background:url('fondo.jpeg') center/cover no-repeat;
+}
 
 /* UTILITIES */
 .eyebrow {
@@ -135,7 +139,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
    COUNTDOWN — RING CLOCK
    ============================== */
 #countdown {
-  background:linear-gradient(135deg,var(--dark) 0%,var(--dark-warm) 100%);
+  background:linear-gradient(135deg,rgba(253,246,243,.72) 0%,rgba(246,233,236,.72) 100%);
   padding:5rem 2rem; text-align:center; position:relative; overflow:hidden;
 }
 #countdown::before {
@@ -146,7 +150,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 }
 .cd-label {
   font-size:.58rem; letter-spacing:.5em; text-transform:uppercase;
-  color:var(--gold-light); margin-bottom:3rem; display:block;
+  color:var(--rose-dark); margin-bottom:3rem; display:block;
 }
 .clock-rings {
   display:flex; align-items:center; justify-content:center;
@@ -163,8 +167,8 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   width:100%; height:100%;
   transform:rotate(-90deg);
 }
-.ring-bg   { fill:none; stroke:rgba(255,255,255,.05); stroke-width:5; }
-.ring-track{ fill:none; stroke:rgba(216,143,168,.18); stroke-width:5; }
+.ring-bg   { fill:none; stroke:rgba(58,31,44,.07); stroke-width:5; }
+.ring-track{ fill:none; stroke:rgba(216,143,168,.25); stroke-width:5; }
 .ring-arc  {
   fill:none; stroke:var(--rose); stroke-width:5; stroke-linecap:round;
   stroke-dasharray:276.46; stroke-dashoffset:276.46;
@@ -177,11 +181,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 .ring-num {
   font-family:var(--serif);
   font-size:clamp(1.8rem,4.5vw,2.8rem);
-  font-weight:300; color:#fff; line-height:1;
+  font-weight:300; color:var(--text); line-height:1;
 }
 .ring-unit {
   font-size:.52rem; letter-spacing:.3em; text-transform:uppercase;
-  color:var(--gold-light);
+  color:var(--rose-dark);
 }
 .cd-sep {
   font-family:var(--serif);
@@ -193,7 +197,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 /* ==============================
    FAMILIA
    ============================== */
-#familia { background:var(--white); }
+#familia { background:rgba(255,255,255,.72); }
 .familia-grid {
   display:grid; grid-template-columns:1fr 1fr;
   gap:2rem; margin-top:3rem;
@@ -206,11 +210,12 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 .familia-icon { font-size:1.75rem; color:var(--rose); margin-bottom:1rem; }
 .familia-lbl { font-size:.56rem; letter-spacing:.4em; text-transform:uppercase; color:var(--rose-dark); margin-bottom:1rem; }
 .familia-name { font-family:var(--serif); font-style:italic; font-size:1.35rem; color:var(--text); line-height:1.7; }
+.familia-quote { font-size:.8rem; color:var(--text-muted); line-height:1.7; text-align:center; margin-bottom:1.1rem; padding:0 .5rem; }
 
 /* ==============================
    DETAILS
    ============================== */
-#details { background:linear-gradient(160deg,#fdf6f3,var(--warm)); }
+#details { background:linear-gradient(160deg,rgba(253,246,243,.72),rgba(246,233,236,.72)); }
 .detail-cards {
   display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
   gap:1.5rem; margin:3rem 0;
@@ -264,7 +269,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 /* ==============================
    ITINERARY
    ============================== */
-#itinerary { background:var(--white); }
+#itinerary { background:rgba(255,255,255,.72); }
 .timeline {
   max-width:580px; margin:3.5rem auto 0;
   padding-left:2rem; position:relative;
@@ -293,7 +298,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
    GALLERY
    ============================== */
 #gallery {
-  background:linear-gradient(160deg,var(--dark-mid),var(--dark-warm));
+  background:linear-gradient(160deg,rgba(253,246,243,.72),rgba(246,233,236,.72));
   padding:5rem 2.5rem; position:relative; overflow:hidden;
 }
 #gallery::before {
@@ -301,8 +306,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
   background:radial-gradient(circle at 10% 90%,rgba(216,143,168,.12) 0%,transparent 40%),
              radial-gradient(circle at 90% 10%,rgba(201,169,110,.08) 0%,transparent 40%);
 }
-#gallery .section-title { color:rgba(255,255,255,.9); }
-#gallery .section-title em { color:var(--gold-light); }
 .carousel {
   position:relative; width:100%; max-width:520px;
   aspect-ratio:4/5; margin:2.75rem auto 0;
@@ -321,7 +324,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 .carousel-dots { display:flex; justify-content:center; gap:.45rem; margin-top:1.5rem; flex-wrap:wrap; }
 .carousel-dot {
   width:6px; height:6px; border-radius:50%; border:none;
-  background:rgba(255,255,255,.25); cursor:pointer;
+  background:rgba(216,143,168,.3); cursor:pointer;
   transition:background .3s, transform .3s; padding:0;
 }
 .carousel-dot.active { background:var(--rose); transform:scale(1.4); }
@@ -329,7 +332,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 /* ==============================
    DRESS CODE
    ============================== */
-#dresscode { background:var(--white); text-align:center; }
+#dresscode { background:rgba(255,255,255,.72); text-align:center; }
 .dress-badge {
   display:inline-block; padding:.5rem 1.75rem;
   border:1px solid var(--rose); border-radius:50px;
@@ -358,9 +361,20 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 }
 
 /* ==============================
+   AGRADECIMIENTO
+   ============================== */
+#agradecimiento { background:rgba(255,255,255,.72); }
+.thanks-text {
+  font-family:var(--serif); font-style:italic;
+  font-size:1.1rem; color:var(--text-muted); line-height:1.9;
+  max-width:600px; margin:0 auto 1.4rem;
+}
+.thanks-text:last-child { margin-bottom:0; }
+
+/* ==============================
    GIFTS
    ============================== */
-#gifts { background:linear-gradient(160deg,#fdf6f3,var(--warm)); text-align:center; }
+#gifts { background:linear-gradient(160deg,rgba(253,246,243,.72),rgba(246,233,236,.72)); text-align:center; }
 .gift-cards {
   display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:1.5rem; margin-top:2.75rem;
@@ -393,34 +407,33 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
    RSVP
    ============================== */
 #rsvp {
-  background:linear-gradient(160deg,var(--dark),var(--dark-warm));
+  background:linear-gradient(160deg,rgba(253,246,243,.72),rgba(246,233,236,.72));
   text-align:center; position:relative; overflow:hidden;
 }
 #rsvp::before {
   content:''; position:absolute; inset:0; pointer-events:none;
   background:radial-gradient(circle at 80% 20%,rgba(216,143,168,.1) 0%,transparent 40%);
 }
-#rsvp .section-title { color:#fff; }
 .rsvp-form { max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:1.1rem; position:relative; z-index:1; }
 .f-field { display:flex; flex-direction:column; gap:.4rem; text-align:left; }
-.f-label { font-size:.56rem; letter-spacing:.4em; text-transform:uppercase; color:var(--gold-light); }
+.f-label { font-size:.56rem; letter-spacing:.4em; text-transform:uppercase; color:var(--rose-dark); }
 .f-textarea {
-  background:rgba(255,255,255,.07); border:1px solid rgba(216,143,168,.3);
-  border-radius:5px; padding:.85rem 1rem; color:#fff;
+  background:rgba(255,255,255,.5); border:1px solid rgba(216,143,168,.3);
+  border-radius:5px; padding:.85rem 1rem; color:var(--text);
   font-family:var(--sans); font-size:.85rem; width:100%; outline:none;
   transition:border-color .3s,background .3s; resize:vertical; min-height:100px;
 }
-.f-textarea::placeholder { color:rgba(255,255,255,.25); }
-.f-textarea:focus { border-color:var(--rose); background:rgba(216,143,168,.06); }
+.f-textarea::placeholder { color:var(--text-muted); }
+.f-textarea:focus { border-color:var(--rose); background:rgba(255,255,255,.75); }
 .attend-row { display:flex; gap:.85rem; }
 .attend-opt {
   flex:1; padding:.85rem; text-align:center;
   border:1px solid rgba(216,143,168,.3); border-radius:5px;
-  cursor:pointer; font-size:.8rem; color:rgba(255,255,255,.45);
+  cursor:pointer; font-size:.8rem; color:var(--text-muted);
   transition:all .3s; user-select:none;
 }
-.attend-opt:hover { border-color:var(--rose); color:var(--rose-light); }
-.attend-opt.sel { border-color:var(--rose); color:var(--rose-light); background:rgba(216,143,168,.12); }
+.attend-opt:hover { border-color:var(--rose); color:var(--rose-dark); }
+.attend-opt.sel { border-color:var(--rose); color:var(--rose-dark); background:rgba(216,143,168,.12); }
 .btn-submit {
   margin-top:.4rem; padding:1.05rem 2rem;
   background:var(--rose); border:none; border-radius:50px;
@@ -433,22 +446,22 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text); o
 /* ==============================
    CONTACT
    ============================== */
-#contact { background:var(--cream); text-align:center; }
+#contact { background:rgba(253,246,243,.72); text-align:center; }
 .contact-grid { display:flex; gap:3.5rem; justify-content:center; flex-wrap:wrap; margin-top:2.75rem; }
 .contact-lbl { font-size:.56rem; letter-spacing:.42em; text-transform:uppercase; color:var(--rose-dark); margin-bottom:.4rem; }
 .contact-name { font-family:var(--serif); font-size:1.25rem; color:var(--text); margin-bottom:.25rem; }
 
 /* FOOTER */
 footer {
-  background:linear-gradient(135deg,var(--dark),#200e17);
+  background:linear-gradient(135deg,rgba(253,246,243,.75),rgba(246,233,236,.75));
   text-align:center; padding:4rem 2rem;
 }
 .footer-names {
   font-family:var(--script);
   font-size:clamp(2.8rem,7vw,4.5rem);
-  color:var(--rose-light); margin-bottom:.5rem;
+  color:var(--rose-dark); margin-bottom:.5rem;
 }
-.footer-date { font-size:.58rem; letter-spacing:.45em; text-transform:uppercase; color:rgba(255,255,255,.22); margin-bottom:1.5rem; }
+.footer-date { font-size:.58rem; letter-spacing:.45em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.5rem; }
 .footer-orn { display:flex; align-items:center; justify-content:center; gap:1rem; }
 .footer-orn::before,.footer-orn::after { content:''; height:1px; width:50px; background:rgba(216,143,168,.3); }
 .footer-gem { color:rgba(216,143,168,.5); }
@@ -719,6 +732,7 @@ body.env-open { overflow:hidden; }
   <button class="nav-dot" onclick="goTo('itinerary')"></button>
   <button class="nav-dot" onclick="goTo('gallery')"></button>
   <button class="nav-dot" onclick="goTo('dresscode')"></button>
+  <button class="nav-dot" onclick="goTo('agradecimiento')"></button>
   <button class="nav-dot" onclick="goTo('gifts')"></button>
   <button class="nav-dot" onclick="goTo('rsvp')"></button>
   <button class="nav-dot" onclick="goTo('contact')"></button>
@@ -805,25 +819,36 @@ body.env-open { overflow:hidden; }
     <div class="divider-line"></div>
 
     <div class="familia-grid">
-      <div class="familia-card reveal">
-        <div class="familia-icon">✦</div>
-        <p class="familia-lbl">Mis Papás</p>
-        <p class="familia-name">José Manuel Guerrero Brambila ✝️<br>Blanca Estela Ruiz García</p>
+      <div class="familia-item reveal">
+        <p class="familia-quote">Mis padres, quienes con todo su amor, esfuerzo y apoyo incondicional han hecho posible este momento tan especial.</p>
+        <div class="familia-card">
+          <div class="familia-icon">❤</div>
+          <p class="familia-lbl">Mis Papás</p>
+          <p class="familia-name">José Manuel Guerrero Brambila<br>Blanca Estela Ruiz García</p>
+        </div>
       </div>
-      <div class="familia-card reveal d1">
-        <div class="familia-icon">✦</div>
-        <p class="familia-lbl">Padrinos de Velación</p>
-        <p class="familia-name">Lázaro Cárdenas Sandoval<br>Ana Cecilia Ruiz García</p>
+      <div class="familia-item reveal d1">
+        <p class="familia-quote">Mis padrinos, que han aceptado tomarme de la mano y caminar a mi lado con tanto cariño.</p>
+        <div class="familia-card">
+          <div class="familia-icon">✦</div>
+          <p class="familia-lbl">Padrinos de Velación</p>
+          <p class="familia-name">Lázaro Cárdenas Sandoval<br>Ana Cecilia Ruiz García</p>
+        </div>
       </div>
-      <div class="familia-card reveal">
-        <div class="familia-icon">✦</div>
-        <p class="familia-lbl">Madrina de Libro y Rosario</p>
-        <p class="familia-name">Claudia Irene Ruiz García</p>
+      <div class="familia-item reveal">
+        <p class="familia-quote">Mis madrinas, por la fortuna de crecer a su lado rodeada de tanto cariño.</p>
+        <div class="familia-card">
+          <div class="familia-icon">✦</div>
+          <p class="familia-lbl">Madrina de Libro y Rosario</p>
+          <p class="familia-name">Claudia Irene Ruiz García</p>
+        </div>
       </div>
-      <div class="familia-card reveal d1">
-        <div class="familia-icon">✦</div>
-        <p class="familia-lbl">Madrinas de Ramo</p>
-        <p class="familia-name">Camila Daelin Cárdenas Ruiz<br>Cintia Carolina Gutiérrez Ruiz</p>
+      <div class="familia-item reveal d1">
+        <div class="familia-card">
+          <div class="familia-icon">✦</div>
+          <p class="familia-lbl">Madrinas de Ramo</p>
+          <p class="familia-name">Camila Daelin Cárdenas Ruiz<br>Cintia Carolina Gutiérrez Ruiz</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1017,7 +1042,20 @@ body.env-open { overflow:hidden; }
       Damas: vestido largo elegante.<br>
       Caballeros: traje formal.
     </p>
-    <div class="avoid-pill reveal">⚠ Por favor evita el blanco y el rosa fuerte · reservados para la quinceañera</div>
+    <div class="avoid-pill reveal">⚠ Por favor evita el blanco, el rosa, el dorado y los colores claros · reservados para la quinceañera</div>
+  </div>
+</section>
+
+<!-- ======================== AGRADECIMIENTO ======================== -->
+<section id="agradecimiento">
+  <div class="container" style="text-align:center">
+    <span class="eyebrow reveal">Con cariño para ti</span>
+    <h2 class="section-title reveal">Un <em>agradecimiento</em></h2>
+    <div class="divider-line"></div>
+
+    <p class="thanks-text reveal">Con el corazón lleno de dicha, te invito a compartir este día tan especial para mí.</p>
+    <p class="thanks-text reveal d1">Su presencia hará de este momento un recuerdo aún más especial, pues no hay mejor regalo que contar con el cariño y la compañía de las personas que forman parte de nuestras vidas.</p>
+    <p class="thanks-text reveal d2">Esperamos tener el privilegio de celebrar juntos este día tan significativo y crear recuerdos que permanecerán para siempre en mi corazón. Será un honor contar con tu presencia ese día.</p>
   </div>
 </section>
 
@@ -1048,7 +1086,7 @@ body.env-open { overflow:hidden; }
 <section id="rsvp">
   <div class="container">
     <span class="eyebrow reveal">Confirmación de Asistencia</span>
-    <h2 class="section-title reveal">¿Me <em style="color:var(--rose-light)">acompañas?</em></h2>
+    <h2 class="section-title reveal">¿Me <em>acompañas?</em></h2>
     <div class="divider-line" style="background:linear-gradient(90deg,transparent,rgba(216,143,168,.4),transparent)"></div>
 
     <div class="rsvp-form reveal" style="position:relative;z-index:1;margin-top:2.75rem">
@@ -1205,7 +1243,7 @@ const revObs = new IntersectionObserver(entries => {
 revEls.forEach(el => revObs.observe(el));
 
 /* ---- NAV DOTS ---- */
-const SECS = ['hero','countdown','familia','details','itinerary','gallery','dresscode','gifts','rsvp','contact'];
+const SECS = ['hero','countdown','familia','details','itinerary','gallery','dresscode','agradecimiento','gifts','rsvp','contact'];
 const dots = document.querySelectorAll('.nav-dot');
 function goTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 const secObs = new IntersectionObserver(entries => {
